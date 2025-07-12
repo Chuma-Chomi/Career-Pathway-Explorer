@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Career Pathway Explorer - Form 1 Guidance Portal 🇿🇲</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <!-- Social icon fonts (Font Awesome 6 Free CDN) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(120deg, #f1f5f9 60%, #e0f2f1 100%);
+      margin: 0;
+      color: #222;
+      min-height: 100vh;
+      transition: background 0.2s, color 0.2s;
+    }
+    header {
+      background: linear-gradient(90deg, #006241 60%, #0b8457 100%);
+      color: white;
+      padding: 22px;
+      text-align: center;
+      font-size: 2em;
+      letter-spacing: 2px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 32;
+      font-size: 1.35em;
+      vertical-align: middle;
+      color: #16a34a;
+    }
+    main {
+      padding: 24px;
+      max-width: 650px;
+      margin: 40px auto 0;
+      background: #fff;
+      border-radius: 13px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background 0.2s, color 0.2s;
+    }
+    .center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin: 40px 0 20px 0;
+    }
+    .main-btn {
+      font-size: 1.15em;
+      background: linear-gradient(90deg,#006241 80%,#0b8457 120%);
+      color: #fff;
+      border: none;
+      border-radius: 14px;
+      padding: 22px 28px;
+      margin: 14px 0;
+      font-weight: bold;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      cursor: pointer;
+      transition: background 0.18s, box-shadow 0.16s, transform 0.15s;
+      min-width: 240px;
+      justify-content: center;
+      width: 95%;
+      max-width: 400px;
+      outline: none;
+      border: none;
+      touch-action: manipulation;
+    }
+    .main-btn {
+  /* ...existing styles... */
+  text-decoration: none;   /* Add this line to remove underline */
+}
+.main-btn:hover, .main-btn:focus {
+  text-decoration: none;   /* Prevent underline on hover/focus too */
+}
+    .main-btn:active, .main-btn:focus {
+      transform: scale(0.97);
+      background: #004d40;
+    }
+    .main-btn:hover {
+      background: #004d40;
+      color: #fff;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+    }
+    .intro {
+      font-size: 1.1em;
+      color: #495c59;
+      margin-bottom: 32px;
+      margin-top: 10px;
+      text-align: center;
+      width: 100%;
+    }
+    /* FAQ Dropdown Styles */
+    .faq-box {
+      margin: 0 0 10px 0;
+      background: #fffbe7;
+      border-left: 4px solid #ffc107;
+      border-radius: 0 0 8px 8px;
+      color: #8a6d00;
+      padding: 18px 22px;
+      width: 100%;
+      box-sizing: border-box;
+      font-size: 1.04em;
+      display: none;
+      flex-direction: column;
+      gap: 18px;
+      overflow: hidden;
+      animation: fadeIn .2s;
+      position: static;
+      z-index: 2;
+    }
+    .faq-box ul {
+      margin: 6px 0 4px 20px;
+      padding: 0;
+    }
+    .faq-box li {
+      margin: 0 0 2px 0;
+      padding: 0;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0;}
+      to { opacity: 1;}
+    }
+    .features-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 18px;
+      padding: 0;
+      margin: 0;
+    }
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: .98em;
+      color: #006241;
+      background: #f6fef9;
+      border-radius: 7px;
+      padding: 6px 13px;
+      margin: 0;
+      min-width: 128px;
+      box-shadow: 0 0 4px rgba(0,98,65,0.07);
+      font-weight: 500;
+    }
+    .about-dev {
+      margin-top: 24px;
+      font-size: 1.01em;
+      color: #006241;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center;
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+    .about-dev:hover, .about-dev:focus {
+      color: #2196f3;
+      text-decoration: underline;
+    }
+    .footer {
+      margin-top: 32px;
+      color: #888;
+      font-size: .97em;
+      text-align: center;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .footer .dev-credit {
+      font-size: .93em;
+      margin-top: 8px;
+      color: #777;
+    }
+    /* Accessibility: High Contrast Mode */
+    body.high-contrast, body.high-contrast header, body.high-contrast main {
+      background: #222 !important;
+      color: #fff !important;
+    }
+    body.high-contrast header {
+      background: #000 !important;
+      color: #fff !important;
+    }
+    body.high-contrast main {
+      background: #222 !important;
+      color: #fff !important;
+      box-shadow: none !important;
+    }
+    body.high-contrast .main-btn,
+    body.high-contrast .faq-box,
+    body.high-contrast .feature-item {
+      background: #000 !important;
+      color: #fff !important;
+      border-color: #fff !important;
+      box-shadow: none !important;
+    }
+    body.high-contrast .faq-box {
+      border-left: 4px solid #fff !important;
+    }
+    body.high-contrast .feature-item {
+      background: #333 !important;
+    }
+    /* Social sharing */
+    .social-share {
+      display: flex;
+      gap: 14px;
+      margin: 24px 0 0 0;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+    .social-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #e7f6fd;
+      color: #006241;
+      font-size: 1.9em;
+      text-decoration: none;
+      box-shadow: 0 1.5px 7px rgba(33,150,243,0.08);
+      transition: background 0.18s, color 0.14s, box-shadow 0.18s;
+    }
+    .social-icon:hover {
+      background: #d6eafe;
+      box-shadow: 0 3px 18px rgba(33,150,243,0.19);
+    }
+    /* Brand coloring */
+    .social-icon.facebook { color: #1877f3; }
+    .social-icon.whatsapp { color: #25D366; }
+    .social-icon.x { color: #000; }
+    .social-icon.instagram { color: #E4405F; }
+    .social-icon.telegram { color: #229ED9; }
+    @media (max-width: 700px) {
+      main { padding: 8px; }
+      .main-btn { min-width: 120px; max-width: 99vw; padding: 16px 2px; font-size: 1em; }
+      .intro { font-size: 1em; }
+      .feature-item { font-size: .97em; min-width: 90px; }
+      .faq-box { padding: 10px 7px; }
+      .about-dev { font-size: .98em; }
+      .social-icon { width: 32px; height: 32px; font-size: 1.2em; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <span class="material-symbols-outlined" style="color:white;">travel_explore</span>
+    Career Pathway Explorer - Form 1 Guidance Portal 🇿🇲
+  </header>
+  <main>
+    <div class="center">
+      <div class="intro" id="introText">
+        Welcome to the <strong>Form 1 Guidance Portal</strong>.<br>
+        Explore Zambian career pathways, analyze results, and get tailored guidance.<br>
+        Please select your mode to begin:
+      </div>
+      
+      <a class="main-btn" href="staff.html">
+  <span class="material-symbols-outlined" style="font-size:2em;">school</span>
+  Staff/Teacher Mode
+</a>
+<a class="main-btn" href="learner.html">
+  <span class="material-symbols-outlined" style="font-size:2em;">person</span>
+  Learner/Guardian Mode
+</a>
+      <button class="main-btn" id="accessibilityBtn">
+        <span class="material-symbols-outlined">visibility</span>
+        Accessibility Options
+      </button>
+      <button class="main-btn" id="faqBtn">
+        <span class="material-symbols-outlined">help</span>
+        Help / FAQ
+      </button>
+      <!-- FAQ Dropdown, positioned ABOVE social sharing to avoid overlap -->
+      <div class="faq-box" id="faqBox">
+        <div>
+          <strong>What is <u>Staff/Teacher Mode</u>?</strong><br>
+          <span>
+            This mode is for school staff and teachers. It allows you to:
+            <ul>
+              <li>Upload or enter ECZ Grade 7 results for multiple learners</li>
+              <li>Analyze and place learners into suitable career pathways automatically</li>
+              <li>Download or print placement reports for your records</li>
+              <li>Access a summary of overall school placements and trends</li>
+            </ul>
+            <em>Note: Only authorized staff should use this mode.</em>
+          </span>
+        </div>
+        <div>
+          <strong>What is <u>Learner/Guardian Mode</u>?</strong><br>
+          <span>
+            This mode is for learners and guardians. It allows you to:
+            <ul>
+              <li>Enter your ECZ Grade 7 results to see career pathway recommendations</li>
+              <li>Take a career interest quiz to discover suitable fields</li>
+              <li>Explore information about various Zambian career paths</li>
+              <li>View and save your career pathway report</li>
+            </ul>
+            <em>No login is required for learners or guardians.</em>
+          </span>
+        </div>
+        <div>
+          <strong>What does <u>Accessibility Options</u> do?</strong><br>
+          <span>
+            This feature helps users who may have difficulty seeing small text or certain colors. You can:
+            <ul>
+              <li>Increase the text size for easier reading</li>
+              <li>Switch the portal to a high-contrast mode for better visibility</li>
+            </ul>
+            <em>Click the button multiple times to cycle through these options.</em>
+          </span>
+        </div>
+        <div>
+          <strong>How do I share the Portal?</strong><br>
+          <span>
+            Use the social media buttons below (<i class="fab fa-whatsapp"></i> WhatsApp, <i class="fab fa-facebook-f"></i> Facebook, <i class="fab fa-x-twitter"></i> X, <i class="fab fa-instagram"></i> Instagram, <i class="fab fa-telegram-plane"></i> Telegram) to share this portal with others.
+          </span>
+        </div>
+        <div>
+          <strong>Need more help?</strong><br>
+          <span>
+            Tap the developer's name at the bottom of the page to send a message for further support.
+          </span>
+        </div>
+      </div>
+      <!-- Social Share (below FAQ dropdown, never overlapped) -->
+      <div class="social-share">
+        <a href="https://wa.me/?text=Check%20out%20the%20Career%20Pathway%20Explorer%20Portal!" target="_blank" class="social-icon whatsapp" title="Share on WhatsApp" rel="noopener">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://your-portal-link.com" target="_blank" class="social-icon facebook" title="Share on Facebook" rel="noopener">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://x.com/intent/tweet?text=Check%20out%20the%20Career%20Pathway%20Explorer%20Portal!%20https://your-portal-link.com" target="_blank" class="social-icon x" title="Share on X" rel="noopener">
+          <i class="fab fa-x-twitter"></i>
+        </a>
+        <a href="https://instagram.com/" target="_blank" class="social-icon instagram" title="Share on Instagram" rel="noopener">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://t.me/share/url?url=https://your-portal-link.com&text=Check%20out%20the%20Career%20Pathway%20Explorer%20Portal!" target="_blank" class="social-icon telegram" title="Share on Telegram" rel="noopener">
+          <i class="fab fa-telegram-plane"></i>
+        </a>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="about-dev" id="devContact" tabindex="0" title="Send a message to the developer">
+        <span class="material-symbols-outlined" style="font-size:1.12em;">person</span>
+        Developer: Tumelo Muyowe
+      </div>
+      <div class="dev-credit">
+        &copy; 2025 Career Pathway Explorer. All rights reserved.
+      </div>
+    </div>
+  </main>
+  <script>
+    // Responsive button tap/click feedback
+    function bounceButton(btn) {
+      btn.style.transform = 'scale(0.97)';
+      setTimeout(() => { btn.style.transform = ''; }, 120);
+    }
+    // Accessibility Options (text size increase, high contrast)
+    let largeFont = false, highContrast = false;
+    const accessibilityBtn = document.getElementById('accessibilityBtn');
+    accessibilityBtn.addEventListener('click', function() {
+      if (!largeFont && !highContrast) {
+        document.body.style.fontSize = "1.25em";
+        largeFont = true;
+        accessibilityBtn.innerHTML = '<span class="material-symbols-outlined">contrast</span> High Contrast Mode';
+      } else if (largeFont && !highContrast) {
+        document.body.classList.add('high-contrast');
+        highContrast = true;
+        accessibilityBtn.innerHTML = '<span class="material-symbols-outlined">text_decrease</span> Normal Mode';
+      } else {
+        document.body.style.fontSize = "";
+        document.body.classList.remove('high-contrast');
+        largeFont = false;
+        highContrast = false;
+        accessibilityBtn.innerHTML = '<span class="material-symbols-outlined">visibility</span> Accessibility Options';
+      }
+    });
+
+    // FAQ/Help Dropdown
+    const faqBtn = document.getElementById('faqBtn');
+    const faqBox = document.getElementById('faqBox');
+    faqBtn.addEventListener('click', function() {
+      const show = faqBox.style.display !== 'flex';
+      faqBox.style.display = show ? 'flex' : 'none';
+      faqBtn.setAttribute('aria-expanded', show ? 'true' : 'false');
+      // Scroll into view if opening FAQ (for small screens)
+      if (show) setTimeout(() => faqBox.scrollIntoView({behavior:"smooth", block:"nearest"}), 200);
+    });
+    faqBtn.addEventListener('keydown', function(e){
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        faqBtn.click();
+      }
+    });
+
+    // Developer contact - open mail client
+    const devContact = document.getElementById('devContact');
+    function mailDev() {
+      window.location.href = "mailto:chumachomiofficial@gmail.com?subject=Career%20Pathway%20Explorer%20Support&body=Hello%20Tumelo%2C%0AI%20would%20like%20to%20leave%20a%20message%20regarding%20the%20portal.%0A";
+    }
+    devContact.onclick = mailDev;
+    devContact.addEventListener('keydown', function(e){
+      if (e.key === "Enter" || e.key === " ") {
+        mailDev();
+      }
+    });
+  </script>
+</body>
+</html>

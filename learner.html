@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Career Pathway Explorer – Form 1 Guidance Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(120deg, #f1f5f9 60%, #e0f2f1 100%);
+      margin: 0;
+      color: #222;
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(90deg, #006241 60%, #0b8457 100%);
+      color: white;
+      padding: 22px;
+      text-align: center;
+      font-size: 2em;
+      letter-spacing: 2px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 32;
+      font-size: 1.35em;
+      vertical-align: middle;
+      color: #16a34a;
+    }
+    main {
+      padding: 24px;
+      max-width: 950px;
+      margin: 32px auto 30px auto;
+      background: #fff;
+      border-radius: 13px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      min-height: 75vh;
+    }
+    .dashboard-nav {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 18px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .dashboard-nav button {
+      background: #e0f2f1;
+      color: #006241;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-size: 1.05em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .dashboard-nav button.selected, .dashboard-nav button:hover {
+      background: #006241;
+      color: #fff;
+    }
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #006241;
+      font-size: 1.24em;
+      font-weight: bold;
+      margin-top: 14px;
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+    }
+    .info-box {
+      background: #e7f6fd;
+      border-left: 4px solid #2196f3;
+      margin: 16px 0;
+      padding: 12px 18px;
+      border-radius: 7px;
+      color: #006241;
+      font-size: 1.05em;
+    }
+    .success-box {
+      background: #f4fff6;
+      border-left: 5px solid #098e59;
+      padding: 14px 18px;
+      border-radius: 7px;
+      margin: 12px 0;
+      font-size: 1.11em;
+      font-weight: bold;
+      color: #006241;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+    }
+    .error-box {
+      background: #ffe0e0;
+      border-left: 5px solid #d32f2f;
+      padding: 14px 18px;
+      border-radius: 7px;
+      margin: 12px 0;
+      font-size: 1.08em;
+      color: #9b1c1c;
+    }
+    .input-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-bottom: 12px;
+    }
+    input[type="number"],
+    select {
+      padding: 12px;
+      font-size: 1em;
+      border: 1.5px solid #cfd8dc;
+      border-radius: 4px;
+      width: 100%;
+      box-sizing: border-box;
+      background: #f8fcf9;
+      transition: border 0.2s;
+    }
+    input[type="number"]:focus, select:focus {
+      border: 1.5px solid #006241;
+      outline: none;
+      background: #e0f2f1;
+    }
+    button {
+      background: #006241;
+      color: white;
+      padding: 13px 0;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+      width: 100%;
+      font-size: 1.13em;
+      box-shadow: 0 1px 6px #0096881a;
+      letter-spacing: 1px;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    button:hover {
+      background: #0b8457;
+      box-shadow: 0 2px 16px #0096882b;
+    }
+    /* Interactive Quiz Styles */
+    .quiz-box {
+      background: #e9f7fa;
+      border-left: 4px solid #00bcd4;
+      padding: 18px 18px 18px 22px;
+      border-radius: 5px;
+      margin-top: 10px;
+      margin-bottom: 18px;
+      max-width: 520px;
+    }
+    .quiz-box label {
+      font-weight: bold;
+      margin-bottom: 6px;
+      display: block;
+      color: #006241;
+    }
+    .quiz-box .quiz-question {
+      margin-bottom: 18px;
+    }
+    .quiz-box .modern-radio {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .modern-radio input[type="radio"] {
+      display: none;
+    }
+    .modern-radio label {
+      background: #f1f5f9;
+      border: 2px solid #b2dfdb;
+      color: #006241;
+      border-radius: 24px;
+      padding: 10px 18px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.2s, border 0.2s;
+      margin-bottom: 6px;
+      user-select: none;
+    }
+    .modern-radio input[type="radio"]:checked + label {
+      background: #006241;
+      color: #fff;
+      border-color: #006241;
+      font-weight:bold;
+    }
+    .quiz-box button {
+      margin: 0;
+      background: #006241;
+      color: #fff;
+      border-radius: 4px;
+      width: auto;
+      padding: 10px 18px;
+      font-weight: bold;
+      font-size: 1em;
+    }
+    .quiz-result {
+      margin-top: 18px;
+      background: #e0f2f1;
+      border-left: 4px solid #00796b;
+      padding: 13px 18px;
+      border-radius: 5px;
+    }
+    @media (max-width: 700px) {
+      main { padding: 8px; }
+      .input-group { grid-template-columns: 1fr; }
+      .dashboard-nav { flex-direction: column; }
+      #elective-selection { margin-left: 4px; }
+      .output-card, .info-box, .success-box, .error-box { padding: 8px; }
+      .quiz-box { max-width: 100%; }
+    }
+    .back-btn {
+  background: #e0f2f1;
+  color: #006241;
+  border: none;
+  border-radius: 7px;
+  padding: 7px 18px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 20px 0 0 0;
+  transition: background 0.15s;
+  text-decoration: none;
+  display: inline-block;
+}
+.back-btn:hover {
+  background: #004d40;
+  color: #fff;
+}
+  </style>
+</head>
+<body>
+  <header>
+    <span class="material-symbols-outlined" style="color:white;">school</span>
+   Learner/Guardian Mode - Career Pathway Explorer
+  </header>
+  <main>
+      <a href="main.html" class="back-btn" style="margin-bottom:20px;display:inline-block;">&larr; Back to Main Menu</a>
+    <div class="dashboard-nav">
+      <button id="nav-ecz" class="selected" onclick="showSection('ecz')">
+        <span class="material-symbols-outlined">calculate</span>ECZ Analyzer
+      </button>
+      <button id="nav-quiz" onclick="showSection('quiz')">
+        <span class="material-symbols-outlined">psychology</span>Career Quiz
+      </button>
+      <button id="nav-pathways" onclick="showSection('pathways')">
+        <span class="material-symbols-outlined">route</span>Explore Pathways
+      </button>
+    </div>
+    <!-- ECZ Analyzer Section -->
+    <div id="section-ecz">
+      <div class="section-title">
+        <span class="material-symbols-outlined">calculate</span>
+        ECZ Grade 7 – Total Score Calculator
+      </div>
+      <div class="info-box">
+        Enter your ECZ scaled marks (0–150 per subject). <b>SP1</b> and <b>SP2</b> are <span style="color:#d32f2f;">Compulsory Passes (≥ 40 marks)</span>.
+      </div>
+      <div class="input-group">
+        <input type="number" id="eng" placeholder="English Language" min="0" max="150">
+        <input type="number" id="math" placeholder="Mathematics" min="0" max="150">
+        <input type="number" id="science" placeholder="Integrated Science" min="0" max="150">
+        <input type="number" id="ss" placeholder="Social Studies" min="0" max="150">
+        <input type="number" id="cts" placeholder="Creative Tech Studies" min="0" max="150">
+        <input type="number" id="lang" placeholder="Zambian Language" min="0" max="150">
+        <input type="number" id="sp1" placeholder="SP1 – Compulsory" min="0" max="150">
+        <input type="number" id="sp2" placeholder="SP2 – Compulsory" min="0" max="150">
+      </div>
+      <button onclick="analyze()"><span class="material-symbols-outlined">analytics</span>Analyze ECZ Score</button>
+      <div id="ecz-output"></div>
+      <div id="suitability-result" style="display:none;"></div>
+      <div id="strength-analyzer" style="display:none;"></div>
+    </div>
+    <!-- Interactive Career Quiz Section (Replaces old Interest Quiz) -->
+    <div id="section-quiz" style="display:none;">
+      <div class="section-title">
+        <span class="material-symbols-outlined">psychology</span>
+        Career Quiz
+      </div>
+      <button onclick="openQuiz()" id="open-quiz-btn" style="margin-top:6px;width:auto;">Open Career Quiz</button>
+      <div class="quiz-box" id="career-quiz-box" style="display:none;"></div>
+      <div class="quiz-result" id="quiz-output"></div>
+    </div>
+    <!-- Pathway Explorer Section -->
+    <div id="section-pathways" style="display:none;">
+      <div class="section-title">
+        <span class="material-symbols-outlined">route</span>
+        Career Pathway Cards
+      </div>
+      <div class="info-box">
+        Select a pathway to explore all subjects and expanded careers. Use the electives to see how subject choices affect your options!
+      </div>
+      <select id="pathway-select" onchange="showCard(this.value)">
+        <option value="">-- Choose a Pathway --</option>
+        <option value="natural">Natural Sciences</option>
+        <option value="agriculture">Agricultural Science</option>
+        <option value="technology">Technology (STEM)</option>
+        <option value="home">Home Economics & Hospitality (STEM)</option>
+        <option value="sports">Physical Education & Sports</option>
+        <option value="arts">Performing & Creative Arts</option>
+        <option value="business">Business & Finance</option>
+        <option value="social">Social Sciences</option>
+      </select>
+      <div class="output-card" id="card-output"></div>
+      <div id="elective-selection" style="display:none;">
+        <b>Choose Electives:</b>
+        <form id="electives-form"></form>
+      </div>
+      <button onclick="downloadPlan()" style="margin-top:24px; background:#1976d2;"><span class="material-symbols-outlined">download</span>Download My Pathway Plan (PDF/Print)</button>
+      <button onclick="saveProgress()" style="margin-top:10px;"><span class="material-symbols-outlined">save</span>Save My Progress</button>
+      <button onclick="loadProgress()" style="margin-top:10px;"><span class="material-symbols-outlined">folder_open</span>Load Saved Progress</button>
+      <div style="margin-top:24px;">
+        <button onclick="sharePlan()"><span class="material-symbols-outlined">share</span>Share My Plan</button>
+      </div>
+    </div>
+  </main>
+  <script>
+    // --- Section Navigation ---
+    function showSection(sec) {
+      ["ecz", "quiz", "pathways"].forEach(id=>{
+        document.getElementById("section-"+id).style.display = (id===sec)?"":"none";
+        let btn = document.getElementById("nav-"+id);
+        if(btn) btn.classList.toggle("selected", id===sec);
+      });
+    }
+    // --- Pathway Data ---
+    const pathwayData = {
+      natural: {
+        title: "NATURAL SCIENCES (STEM)",
+        subjects: [
+          "English Language", "Mathematics", "Civic Education", "Biology", "Chemistry", "Physics", "ICT"
+        ],
+        electives: [],
+        careers: [
+          "Doctor", "Nurse", "Pharmacist", "Laboratory Technician", "Biomedical Scientist",
+          "Environmental Scientist", "Engineer (Civil, Mechanical, Electrical, Chemical)",
+          "Dentist", "Nutritionist", "Research Scientist", "Geologist", "Meteorologist"
+        ]
+      },
+      agriculture: {
+        title: "AGRICULTURAL SCIENCE (STEM)",
+        subjects: [
+          "English Language", "Mathematics", "Civic Education", "Agricultural Science", "Chemistry", "Physics", "ICT"
+        ],
+        electives: [],
+        careers: [
+          "Agricultural Scientist", "Agronomist", "Veterinary Doctor",
+          "Livestock Manager", "Soil Scientist", "Forestry Officer",
+          "Fisheries Officer", "Farm Manager", "Agricultural Extension Officer",
+          "Horticulturist", "Food Technologist"
+        ]
+      },
+      technology: {
+        title: "TECHNOLOGY (STEM)",
+        subjects: [
+          "English Language", "Mathematics", "Civic Education", "Chemistry", "Physics", "ICT"
+        ],
+        electives: [
+          {
+            label: "Computer Science or Design & Technology",
+            options: ["Computer Science", "Design & Technology"]
+          }
+        ],
+        careers: [
+          "Software Developer", "Computer Programmer", "Systems Analyst", "Network Administrator",
+          "ICT Teacher", "Web Developer", "Robotics Engineer", "CAD Designer",
+          "Civil Engineer", "Mechanical Engineer", "Electrical Technician", "Telecommunications Specialist"
+        ]
+      },
+      home: {
+        title: "HOME ECONOMICS AND HOSPITALITY (STEM)",
+        subjects: [
+          "English Language",
+          "Mathematics",
+          "Civic Education",
+          "Biology",
+          "ICT"
+        ],
+        electives: [
+          {
+            label: "Include Chemistry? (optional for Travel & Tourism)",
+            options: ["Include Chemistry", "Not Taking Chemistry"]
+          },
+          {
+            label: "Choose one (Language or Practical):",
+            options: [
+              "French", "Chinese", "Portuguese", "Swahili",
+              "Fashion & Fabrics", "Food & Nutrition", "Hospitality Management", "Travel & Tourism"
+            ]
+          }
+        ],
+        careers: [
+          "Nutritionist", "Chef", "Hotel/Restaurant Manager", "Interior Designer", "Fashion Designer",
+          "Food Scientist", "Hospitality Manager", "Event Planner", "Housekeeping Supervisor",
+          "Textile Technologist", "Travel Consultant"
+        ]
+      },
+      sports: {
+        title: "PHYSICAL EDUCATION AND SPORTS",
+        subjects: [
+          "English Language", "Mathematics", "Civic Education", "Biology", "Physical Education", "ICT"
+        ],
+        electives: [
+          {
+            label: "Geography, History, or Religious Education",
+            options: ["Geography", "History", "Religious Education"]
+          },
+          {
+            label: "Chemistry or Physics",
+            options: ["Chemistry", "Physics"]
+          }
+        ],
+        careers: [
+          "Sports Coach", "Physical Education Teacher", "Physiotherapist", "Sports Administrator",
+          "Fitness Trainer", "Referee/Umpire", "Sports Journalist", "Sports Nutritionist",
+          "Recreation Manager", "Personal Trainer"
+        ]
+      },
+      arts: {
+        title: "PERFORMING AND CREATIVE ARTS",
+        subjects: [
+          "English Language", "Mathematics", "Civic Education", "Zambian Language", "ICT"
+        ],
+        electives: [
+          {
+            label: "Music or Art & Design",
+            options: ["Music", "Art & Design"]
+          },
+          {
+            label: "Literature in English or Zambian Language",
+            options: ["Literature in English", "Literature in Zambian Language"]
+          }
+        ],
+        careers: [
+          "Musician", "Actor/Actress", "Visual Artist", "Graphic Designer", "Dancer",
+          "Film Director", "Art Teacher", "Curator", "Fashion Designer", "Set Designer",
+          "Author/Poet", "Illustrator"
+        ]
+      },
+      business: {
+        title: "BUSINESS AND FINANCE",
+        subjects: [
+          "English Language", "Mathematics", "Civic Education", "Principles of Accounts", "Commerce", "ICT"
+        ],
+        electives: [
+          {
+            label: "Physics, Chemistry, or Biology",
+            options: ["Physics", "Chemistry", "Biology"]
+          }
+        ],
+        careers: [
+          "Accountant", "Auditor", "Banker", "Entrepreneur", "Business Analyst",
+          "Stockbroker", "Insurance Agent", "Economist", "Financial Advisor",
+          "Marketing Officer", "Procurement Officer", "Human Resources Officer"
+        ]
+      },
+      social: {
+        title: "SOCIAL SCIENCES",
+        subjects: [
+          "English Language", "Mathematics", "Civic Education", "ICT"
+        ],
+        electives: [
+          {
+            label: "Geography, History, or Religious Education",
+            options: ["Geography", "History", "Religious Education"]
+          },
+          {
+            label: "Literature in English, Zambian Language, Foreign Language, or Literature in Zambian Language",
+            options: ["Literature in English", "Zambian Language", "Foreign Language", "Literature in Zambian Language"]
+          },
+          {
+            label: "Physics, Chemistry, or Biology",
+            options: ["Physics", "Chemistry", "Biology"]
+          }
+        ],
+        careers: [
+          "Teacher", "Journalist", "Lawyer", "Social Worker", "Psychologist",
+          "Political Scientist", "Historian", "Researcher", "Diplomat",
+          "Community Development Officer", "Policy Analyst", "NGO Worker"
+        ]
+      }
+    };
+    let currentElectiveSelections = {};
+
+    // ECZ Analyzer Logic
+    function analyze() {
+      const ids = ["eng","math","science","ss","cts","lang","sp1","sp2"];
+      let scores = {}, error = [];
+      ids.forEach(id => {
+        const val = parseFloat(document.getElementById(id).value);
+        if (isNaN(val) || val < 0 || val > 150) {
+          error.push(`⚠️ ${id.toUpperCase()} must be between 0 and 150`);
+        }
+        scores[id] = val || 0;
+      });
+      if (error.length > 0) {
+        document.getElementById("ecz-output").innerHTML = '<div class="error-box">' + error.join("<br>") + '</div>';
+        return;
+      }
+      if (scores.sp1 < 40 || scores.sp2 < 40) {
+        document.getElementById("ecz-output").innerHTML =
+          `<div class="error-box"><span class="material-symbols-outlined">cancel</span> SP1 and SP2 are compulsory and must be passed (≥ 40 marks)</div>`;
+        return;
+      }
+      const others = [
+        {name: "English", val: scores.eng},
+        {name: "Math", val: scores.math},
+        {name: "Science", val: scores.science},
+        {name: "Social Studies", val: scores.ss},
+        {name: "CTS", val: scores.cts},
+        {name: "Zambian Language", val: scores.lang}
+      ];
+      const best4 = others.sort((a,b) => b.val - a.val).slice(0,4);
+      const total = scores.sp1 + scores.sp2 + best4.reduce((sum,s)=>sum+s.val,0);
+      const band = total >=800 ? "Distinction 🏅" : total>=700 ? "Merit" : total>=600 ? "Credit" : total>=500 ? "Pass ✅" : "Below Pass ❌";
+      const eligible = total >= 500;
+      document.getElementById("ecz-output").innerHTML = `
+        <div class="success-box">
+<span class="material-symbols-outlined" style="font-size:1.1em;vertical-align:middle;color:#388e3c;">verified</span> SP1: ${scores.sp1} | SP2: ${scores.sp2}<br>
+<b>Best 4 Subjects:</b> ${best4.map(s=>`${s.name}: ${s.val}`).join(", ")}<br>
+<span class="material-symbols-outlined" style="font-size:1.1em;vertical-align:middle;color:#0288d1;">score</span> <b>Total:</b> ${total} / 900<br>
+<span class="material-symbols-outlined" style="font-size:1.1em;vertical-align:middle;color:#ff9800;">stars</span> <b>Band:</b> ${band}<br>
+<span class="material-symbols-outlined" style="font-size:1.1em;vertical-align:middle;color:#009688;">school</span> Form 1 Eligibility: ${eligible ? "✅ YES" : "❌ NO"}
+        </div>`;
+      recommendPathways(scores);
+      subjectStrength(scores);
+    }
+    function recommendPathways(scores) {
+      let bestSubjects = Object.entries(scores)
+        .filter(([id]) => ["eng","math","science","ss","cts","lang"].includes(id))
+        .sort((a,b) => b[1] - a[1])
+        .slice(0,4)
+        .map(([id]) => id);
+      let recommendation = "";
+      if (bestSubjects.includes("math") && bestSubjects.includes("science")) {
+        recommendation = "Your marks suggest you might excel in <b>Natural Sciences</b> or <b>Technology</b>!";
+      } else if (bestSubjects.includes("cts") || bestSubjects.includes("lang")) {
+        recommendation = "Your marks show strength in creative or language subjects. Consider <b>Creative Arts</b>, <b>Social Sciences</b>, or <b>Home Economics</b>!";
+      } else if (bestSubjects.includes("ss")) {
+        recommendation = "You have good potential for <b>Social Sciences</b> or <b>Business & Finance</b>!";
+      } else {
+        recommendation = "Explore all pathways—you have balanced strengths!";
+      }
+      document.getElementById("suitability-result").style.display = "block";
+      document.getElementById("suitability-result").innerHTML = recommendation;
+    }
+    function subjectStrength(scores) {
+      const others = [
+        {name: "English", val: scores.eng},
+        {name: "Math", val: scores.math},
+        {name: "Science", val: scores.science},
+        {name: "Social Studies", val: scores.ss},
+        {name: "CTS", val: scores.cts},
+        {name: "Zambian Language", val: scores.lang}
+      ];
+      let weak = others.filter(s => s.val < 70).map(s => s.name);
+      if (weak.length) {
+        document.getElementById("strength-analyzer").style.display = "block";
+        document.getElementById("strength-analyzer").innerHTML =
+          `<b>Subjects to Improve:</b> ${weak.join(", ")}.<br>
+          <a href="https://www.khanacademy.org/" target="_blank">Try online resources to boost your skills!</a>`;
+      } else {
+        document.getElementById("strength-analyzer").style.display = "none";
+      }
+    }
+    // --- Interactive Career Quiz ---
+    function openQuiz() {
+      document.getElementById("open-quiz-btn").style.display = "none";
+      document.getElementById("career-quiz-box").style.display = "";
+      renderQuiz();
+    }
+    const quizQuestions = [
+      {
+        q: "Which of these activities do you enjoy the most?",
+        a: [
+          { text: "Solving science or maths problems", value: "STEM" },
+          { text: "Drawing, music, acting, or designing", value: "ARTS" },
+          { text: "Helping others, teaching, or counseling", value: "SOCIAL" },
+          { text: "Business, selling, or managing money", value: "BUSINESS" },
+          { text: "Cooking, sewing, or hospitality", value: "HOME" },
+          { text: "Playing or coaching sports", value: "SPORTS" },
+          { text: "Working outdoors or with plants/animals", value: "AGRICULTURE" }
+        ]
+      },
+      {
+        q: "Which school subject do you find most interesting?",
+        a: [
+          { text: "Mathematics or Science", value: "STEM" },
+          { text: "English or Zambian Language", value: "SOCIAL" },
+          { text: "Art, Music, or Drama", value: "ARTS" },
+          { text: "Business Studies or Accounts", value: "BUSINESS" },
+          { text: "Food & Nutrition/Design & Technology", value: "HOME" },
+          { text: "Physical Education", value: "SPORTS" },
+          { text: "Agricultural Science", value: "AGRICULTURE" }
+        ]
+      },
+      {
+        q: "What type of project would you most like to do?",
+        a: [
+          { text: "Build a robot or code a program", value: "TECHNOLOGY" },
+          { text: "Start a business or sell a product", value: "BUSINESS" },
+          { text: "Create a painting or perform on stage", value: "ARTS" },
+          { text: "Organize a sports tournament", value: "SPORTS" },
+          { text: "Plant a garden or raise animals", value: "AGRICULTURE" },
+          { text: "Cook a meal or sew clothes", value: "HOME" },
+          { text: "Write a story or debate", value: "SOCIAL" }
+        ]
+      },
+      {
+        q: "Which future career sounds most appealing?",
+        a: [
+          { text: "Doctor, Nurse, or Pharmacist", value: "NATURAL" },
+          { text: "Software Developer or Engineer", value: "TECHNOLOGY" },
+          { text: "Teacher, Lawyer, or Journalist", value: "SOCIAL" },
+          { text: "Chef, Fashion Designer, or Hotel Manager", value: "HOME" },
+          { text: "Athlete, Coach, or Fitness Trainer", value: "SPORTS" },
+          { text: "Artist, Musician, or Actor", value: "ARTS" },
+          { text: "Farmer, Vet, or Agricultural Scientist", value: "AGRICULTURE" },
+          { text: "Accountant, Banker, or Business Owner", value: "BUSINESS" }
+        ]
+      },
+      {
+        q: "Which statement best describes your personality?",
+        a: [
+          { text: "I enjoy experimenting and understanding how things work.", value: "STEM" },
+          { text: "I am creative and enjoy expressing myself.", value: "ARTS" },
+          { text: "I like to help and support others.", value: "SOCIAL" },
+          { text: "I am practical and enjoy hands-on activities.", value: "HOME" },
+          { text: "I am competitive and energetic.", value: "SPORTS" },
+          { text: "I am business-minded and a good negotiator.", value: "BUSINESS" },
+          { text: "I love nature and working outdoors.", value: "AGRICULTURE" }
+        ]
+      },
+      {
+        q: "How do you prefer to solve problems?",
+        a: [
+          { text: "Using logic, numbers, or science", value: "STEM" },
+          { text: "Through creativity and imagination", value: "ARTS" },
+          { text: "By talking it out with others", value: "SOCIAL" },
+          { text: "By making or fixing something", value: "TECHNOLOGY" },
+          { text: "By researching or reading", value: "SOCIAL" },
+          { text: "By trying practical approaches", value: "HOME" }
+        ]
+      },
+      {
+        q: "Which club would you join at school?",
+        a: [
+          { text: "Science or Maths Club", value: "STEM" },
+          { text: "Debate or Writers Club", value: "SOCIAL" },
+          { text: "Drama, Music, or Arts Club", value: "ARTS" },
+          { text: "Sports Team", value: "SPORTS" },
+          { text: "Young Farmers or Environmental Club", value: "AGRICULTURE" },
+          { text: "Business Club", value: "BUSINESS" },
+          { text: "JETS or Technology Club", value: "TECHNOLOGY" },
+          { text: "Home Economics Club", value: "HOME" }
+        ]
+      },
+      {
+        q: "Which of these would you most like to invent?",
+        a: [
+          { text: "A new medicine or vaccine", value: "NATURAL" },
+          { text: "A smartphone app or gadget", value: "TECHNOLOGY" },
+          { text: "A new recipe or fashion trend", value: "HOME" },
+          { text: "A new business model", value: "BUSINESS" },
+          { text: "A new type of sport or fitness routine", value: "SPORTS" },
+          { text: "A new art style or musical instrument", value: "ARTS" },
+          { text: "A new way of farming or animal care", value: "AGRICULTURE" },
+          { text: "A new way to teach or help people", value: "SOCIAL" }
+        ]
+      }
+    ];
+    const careerPathwayMap = {
+      STEM: ["🌿 Natural Sciences", "💻 Technology (STEM)"],
+      TECHNOLOGY: ["💻 Technology (STEM)"],
+      NATURAL: ["🌿 Natural Sciences"],
+      ARTS: ["🎭 Performing & Creative Arts"],
+      SOCIAL: ["🌍 Social Sciences"],
+      BUSINESS: ["💼 Business & Finance"],
+      HOME: ["🍽️ Home Economics & Hospitality (STEM)"],
+      SPORTS: ["⚽ Physical Education & Sports"],
+      AGRICULTURE: ["🚜 Agricultural Science"]
+    };
+    let quizAnswers = [];
+    function renderQuiz(qIndex = 0, reset = false) {
+      const box = document.getElementById("career-quiz-box");
+      const output = document.getElementById("quiz-output");
+      if (reset) quizAnswers = [];
+      output.innerHTML = "";
+      if (qIndex >= quizQuestions.length) {
+        // Show result
+        let counts = {};
+        quizAnswers.forEach(ans => counts[ans] = (counts[ans] || 0) + 1);
+        let topValue = null, topCount = 0;
+        for (let k in counts) if (counts[k] > topCount) { topValue = k; topCount = counts[k]; }
+        let suggestion = "Explore all pathways!";
+        if (topValue && careerPathwayMap[topValue]) {
+          suggestion = "Best match: <b>" + careerPathwayMap[topValue].join(", ") + "</b>";
+        }
+        output.innerHTML = `<div>Your answers suggest:<br>${suggestion}</div>
+          <div style="margin-top:12px;">
+            <button onclick="showSuggestedCard('${topValue}')">Show My Pathway Card</button>
+            <button onclick="renderQuiz(0,true)">Try Again</button>
+          </div>`;
+        box.innerHTML = "";
+        return;
+      }
+      const qObj = quizQuestions[qIndex];
+      let html = `<div class="quiz-question"><label>${qObj.q}</label><div class="modern-radio">`;
+      qObj.a.forEach((o, i) => {
+        const inputId = `quiz${qIndex}_${i}`;
+        html += `
+          <input type="radio" name="quiz${qIndex}" id="${inputId}" value="${o.value}">
+          <label for="${inputId}">${o.text}</label>
+        `;
+      });
+      html += `</div></div>
+        <button onclick="nextQuizQ(${qIndex})">Next</button>`;
+      box.innerHTML = html;
+    }
+    function nextQuizQ(idx) {
+      let val = document.querySelector(`input[name="quiz${idx}"]:checked`);
+      if (!val) {
+        alert("Please select an answer.");
+        return;
+      }
+      quizAnswers[idx] = val.value;
+      renderQuiz(idx + 1);
+    }
+    // Show pathway card based on quiz result
+    function showSuggestedCard(topValue) {
+      // Map emoji label to select value
+      let pathwayKey = topValue && careerPathwayMap[topValue] ? careerPathwayMap[topValue][0] : null;
+      let selectVal = "";
+      switch (pathwayKey) {
+        case "🌿 Natural Sciences": selectVal = "natural"; break;
+        case "💻 Technology (STEM)": selectVal = "technology"; break;
+        case "🎭 Performing & Creative Arts": selectVal = "arts"; break;
+        case "🌍 Social Sciences": selectVal = "social"; break;
+        case "💼 Business & Finance": selectVal = "business"; break;
+        case "🍽️ Home Economics & Hospitality (STEM)": selectVal = "home"; break;
+        case "⚽ Physical Education & Sports": selectVal = "sports"; break;
+        case "🚜 Agricultural Science": selectVal = "agriculture"; break;
+        default: selectVal = ""; break;
+      }
+      if (selectVal) {
+        document.getElementById("pathway-select").value = selectVal;
+        showCard(selectVal);
+        document.getElementById("card-output").style.display = "";
+        // Scroll to card for user convenience
+        document.getElementById("card-output").scrollIntoView({behavior: "smooth"});
+      }
+    }
+    // --- Pathway Cards & Electives ---
+    function showCard(val) {
+      const data = pathwayData[val];
+      if (!data) {
+        document.getElementById("card-output").innerHTML = "Select a valid pathway above to view subjects and careers.";
+        document.getElementById("elective-selection").style.display = "none";
+        return;
+      }
+      // Rebuild elective state if changed pathway
+      if (!currentElectiveSelections[val]) {
+        currentElectiveSelections[val] = data.electives.map(e =>
+          typeof e === "string" ? "" : e.options[0]
+        );
+      }
+      // Prepare subject list with elective logic
+      let subjects = [...data.subjects];
+      // Special logic for HOME ECONOMICS AND HOSPITALITY (STEM)
+      if (val === "home") {
+        let chem = currentElectiveSelections[val][0] || "Include Chemistry";
+        if (chem === "Include Chemistry") subjects.push("Chemistry");
+        subjects.push(currentElectiveSelections[val][1] || "French");
+      } else if (val === "technology" && data.electives.length) {
+        let electiveVal = currentElectiveSelections[val][0] || "Computer Science";
+        subjects.push(electiveVal);
+      } else if (data.electives && typeof data.electives[0] !== "string" && data.electives.length) {
+        data.electives.forEach((e, idx) => {
+          let sel = currentElectiveSelections[val][idx] || e.options[0];
+          subjects.push(sel);
+        });
+      }
+      // Build main card HTML
+      let html = `<strong>${data.title}</strong><br/><b>Compulsory Subjects:</b><ul>`;
+      data.subjects.forEach(s => html += `<li>${s}</li>`);
+      if (val === "home") {
+        html += `<li>${(currentElectiveSelections["home"] && currentElectiveSelections["home"][0] === "Include Chemistry") ? "Chemistry" : "<span style='color:#bbb;'>No Chemistry</span>"}</li>`;
+        html += `<li>${currentElectiveSelections["home"] ? currentElectiveSelections["home"][1] : ""}</li>`;
+      } else if (data.electives && typeof data.electives[0] !== "string" && data.electives.length) {
+        html += "</ul><b>Elective Options chosen:</b><ul>";
+        data.electives.forEach((e, idx) => {
+          html += `<li>${currentElectiveSelections[val][idx] || e.options[0]}</li>`;
+        });
+      }
+      html += "</ul><b>Possible Careers:</b><ul>";
+      data.careers.forEach(c => html += `<li>${c}</li>`);
+      html += "</ul>";
+      document.getElementById("card-output").innerHTML = html;
+      // Build elective selection area
+      let electiveHTML = "";
+      if (data.electives.length) {
+        document.getElementById("elective-selection").style.display = "block";
+        electiveHTML += "";
+        data.electives.forEach((e, idx) => {
+          electiveHTML += `<label>${typeof e === "string" ? e : e.label}</label><select name="elective${idx}" onchange="updateElectives('${val}',${idx},this.value)">`;
+          (typeof e === "string" ? [] : e.options).forEach(opt => {
+            const selected = currentElectiveSelections[val][idx] === opt ? "selected" : "";
+            electiveHTML += `<option value="${opt}" ${selected}>${opt}</option>`;
+          });
+          electiveHTML += "</select><br>";
+        });
+      } else {
+        document.getElementById("elective-selection").style.display = "none";
+      }
+      document.getElementById("electives-form").innerHTML = electiveHTML;
+    }
+    function updateElectives(val, idx, value) {
+      currentElectiveSelections[val][idx] = value;
+      showCard(val);
+    }
+    // Print/PDF Export
+    function downloadPlan() {
+      let node = document.getElementById("card-output");
+      if (!node.innerText.trim()) {
+        alert("Please select a pathway first!");
+        return;
+      }
+      window.print();
+    }
+    // Save/Load Progress
+    function saveProgress() {
+      const pathway = document.getElementById("pathway-select").value;
+      const selects = document.querySelectorAll("#electives-form select");
+      const electives = Array.from(selects).map(sel => sel.value);
+      localStorage.setItem("savedPathway", pathway);
+      localStorage.setItem("savedElectives", JSON.stringify(electives));
+      alert("Progress saved!");
+    }
+    function loadProgress() {
+      const pathway = localStorage.getItem("savedPathway");
+      const electives = JSON.parse(localStorage.getItem("savedElectives") || "[]");
+      if (!pathway) { alert("No progress found."); return; }
+      document.getElementById("pathway-select").value = pathway;
+      showCard(pathway);
+      setTimeout(() => {
+        const selects = document.querySelectorAll("#electives-form select");
+        electives.forEach((val, i) => { if (selects[i]) selects[i].value = val; });
+      }, 100);
+    }
+    // Social Share
+    function sharePlan() {
+      let text = "Check out my Career Pathway Plan on Career Pathway Explorer – Form 1 Guidance Portal!";
+      let url = window.location.href;
+      if (navigator.share) {
+        navigator.share({ title: "My Career Plan", text, url });
+      } else {
+        alert("Copy this link to share:\n" + url);
+      }
+    }
+  </script>
+</body>
+</html>

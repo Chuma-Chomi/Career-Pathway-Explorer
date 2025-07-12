@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Staff/Teacher Mode – Career Pathway Explorer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(120deg, #f1f5f9 60%, #e0f2f1 100%);
+      margin: 0;
+      color: #222;
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(90deg, #006241 60%, #0b8457 100%);
+      color: white;
+      padding: 22px;
+      text-align: center;
+      font-size: 2em;
+      letter-spacing: 2px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 32;
+      font-size: 1.35em;
+      vertical-align: middle;
+      color: #16a34a;
+    }
+    main {
+      padding: 24px;
+      max-width: 1100px;
+      margin: 32px auto 30px auto;
+      background: #fff;
+      border-radius: 13px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      min-height: 75vh;
+    }
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #006241;
+      font-size: 1.24em;
+      font-weight: bold;
+      margin-top: 14px;
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+    }
+    .dashboard-nav {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 18px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .dashboard-nav button {
+      background: #e0f2f1;
+      color: #006241;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-size: 1.05em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .dashboard-nav button.selected, .dashboard-nav button:hover {
+      background: #006241;
+      color: #fff;
+    }
+    .info-box {
+      background: #e7f6fd;
+      border-left: 4px solid #2196f3;
+      margin: 16px 0;
+      padding: 12px 18px;
+      border-radius: 7px;
+      color: #006241;
+      font-size: 1.05em;
+    }
+    .success-box {
+      background: #f4fff6;
+      border-left: 5px solid #098e59;
+      padding: 14px 18px;
+      border-radius: 7px;
+      margin: 12px 0;
+      font-size: 1.11em;
+      font-weight: bold;
+      color: #006241;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+    }
+    .error-box {
+      background: #ffe0e0;
+      border-left: 5px solid #d32f2f;
+      padding: 14px 18px;
+      border-radius: 7px;
+      margin: 12px 0;
+      font-size: 1.08em;
+      color: #9b1c1c;
+    }
+    .school-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 18px;
+      margin-top: 8px;
+      background: #f7fafc;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .school-table th, .school-table td {
+      border: 1px solid #cfd8dc;
+      padding: 9px 6px;
+      text-align: center;
+    }
+    .school-table th {
+      background: #e0f2f1;
+      color: #006241;
+      font-weight: bold;
+    }
+    .add-row-btn, .remove-row-btn, .action-btn {
+      background: #0b8457;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 7px 13px;
+      font-size: 1em;
+      margin-left: 6px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .add-row-btn:hover, .remove-row-btn:hover, .action-btn:hover {
+      background: #004d40;
+    }
+    label.checkbox-label {
+      margin-right: 18px;
+      margin-bottom: 5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+    input[type="file"] {
+      margin: 8px 0;
+    }
+    .school-details {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+    .school-details label {
+      font-weight: bold;
+      color: #006241;
+      margin-right: 4px;
+    }
+    .school-details select, .school-details input {
+      padding: 8px 13px;
+      font-size: 1.07em;
+      border: 1.5px solid #cfd8dc;
+      border-radius: 6px;
+      background: #f7fafc;
+      min-width: 170px;
+      transition: border .2s;
+    }
+    .school-details select:focus, .school-details input:focus {
+      border: 1.5px solid #006241;
+      background: #e0f2f1;
+      outline: none;
+    }
+    .elective-box {
+      margin: 10px 0 14px 32px;
+      background: #f6fff8;
+      border-left: 4px solid #8bc34a;
+      padding: 12px 20px;
+      border-radius: 7px;
+      color: #006241;
+      font-size: 1em;
+      max-width: 530px;
+    }
+    .elective-box label {
+      margin-right: 8px;
+      color: #006241;
+      font-weight: bold;
+      font-size: 1em;
+    }
+    .pathway-summary-list {
+      margin-top: 20px;
+      background: #f7fafc;
+      border-left: 4px solid #006241;
+      padding: 18px;
+      border-radius: 9px;
+      color: #006241;
+      font-size: 1.11em;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+    }
+    .pathway-summary-list b {
+      color: #004d40;
+    }
+    .pathway-summary-list li {
+      margin-bottom: 3px;
+      margin-top: 3px;
+    }
+    /* Print styles */
+    @media print {
+      body, main {
+        background: white !important;
+        color: black !important;
+        box-shadow: none !important;
+      }
+      .dashboard-nav,
+      .add-row-btn, .action-btn,
+      #ecz-output,
+      #section-pathways,
+      #section-automate,
+      .pathway-summary-list {
+        display: none !important;
+      }
+      #print-header {
+        display: block !important;
+      }
+      .school-table th, .school-table td {
+        border: 1px solid #222 !important;
+        color: #222 !important;
+      }
+      header {
+        background: white !important;
+        color: #006241 !important;
+        box-shadow: none !important;
+      }
+    }
+    #print-header {
+      display: none;
+      margin-bottom: 16px;
+      border-bottom: 2px solid #006241;
+      padding-bottom: 12px;
+    }
+    #print-pathways {
+      margin-top: 4px;
+      font-size: 1.07em;
+      color: #006241;
+    }
+    @media (max-width: 700px) {
+      main { padding: 8px; }
+      .school-table { font-size: .97em; }
+      .dashboard-nav { flex-direction: column; }
+      .school-details { flex-direction: column; gap: 8px; }
+      .elective-box { margin-left: 4px; }
+      .pathway-summary-list { padding: 10px; }
+    }f;
+}
+    .back-btn {
+  background: #e0f2f1;
+  color: #006241;
+  border: none;
+  border-radius: 7px;
+  padding: 7px 18px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 20px 0 0 0;
+  transition: background 0.15s, color 0.15s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.back-btn:visited {
+  color: #006241;
+}
+
+.back-btn:hover,
+.back-btn:focus {
+  background: #004d40;
+  color: #fff;
+  text-decoration: none;
+}
+
+ .back-btn {
+  background: #e0f2f1;
+  color: #006241;
+  border: none;
+  border-radius: 7px;
+  padding: 7px 18px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 20px 0 0 0;
+  transition: background 0.15s;
+  text-decoration: none;
+  display: inline-block;
+}
+.back-btn:hover {
+  background: #004d40;
+  color: #fff;
+}
+  </style>
+</head>
+<body>
+  <header>
+    <span class="material-symbols-outlined" style="color:white;">school</span>
+    Staff/Teacher Mode – Career Pathway Explorer
+  </header>
+  <main>
+        <a href="main.html" class="back-btn" style="margin-bottom:20px;display:inline-block;">&larr; Back to Main Menu</a>
+    <!-- Print header (hidden except in print)
+    <div id="print-header">
+      <div id="print-school"></div>
+      <div id="print-pathways"></div>
+    </div>
+    <!-- School Details -->
+    <div class="school-details">
+      <div>
+        <label for="province">Province:</label>
+        <select id="province" required>
+          <option value="">Select Province</option>
+          <option value="Central">Central</option>
+          <option value="Copperbelt">Copperbelt</option>
+          <option value="Eastern">Eastern</option>
+          <option value="Luapula">Luapula</option>
+          <option value="Lusaka">Lusaka</option>
+          <option value="Muchinga">Muchinga</option>
+          <option value="Northern">Northern</option>
+          <option value="North-Western">North-Western</option>
+          <option value="Southern">Southern</option>
+          <option value="Western">Western</option>
+        </select>
+      </div>
+      <div>
+        <label for="district">District:</label>
+        <select id="district" required>
+          <option value="">Select District</option>
+        </select>
+      </div>
+      <div>
+        <label for="school">School Name:</label>
+        <input type="text" id="school" placeholder="Enter school name" required>
+      </div>
+    </div>
+    <div id="school-details-error" class="error-box" style="display:none;"></div>
+    <div class="dashboard-nav">
+      <button id="nav-eczs" class="selected" onclick="showSection('eczs')">
+        <span class="material-symbols-outlined">calculate</span>Enter Results
+      </button>
+      <button id="nav-pathways" onclick="showSection('pathways')">
+        <span class="material-symbols-outlined">route</span>Pathways Offered
+      </button>
+      <button id="nav-automate" onclick="showSection('automate')">
+        <span class="material-symbols-outlined">auto_mode</span>Automate Placement
+      </button>
+    </div>
+    <!-- Enter Results -->
+    <div id="section-eczs">
+      <div class="section-title">
+        <span class="material-symbols-outlined">calculate</span>
+        Enter ECZ Results
+      </div>
+      <div class="info-box">
+        Enter exactly 6 subject marks (0–150) plus SP1 and SP2 (compulsory, 0–150). Exam number must be 12 digits.
+      </div>
+      <button class="add-row-btn" onclick="addRow()">
+        <span class="material-symbols-outlined">add</span>Add Learner
+      </button>
+      <button class="action-btn" onclick="analyzeAllResults()">
+        <span class="material-symbols-outlined">analytics</span>Analyze All
+      </button>
+      <button class="action-btn" onclick="printTable()">
+        <span class="material-symbols-outlined">print</span>Print Table
+      </button>
+      <button class="action-btn" onclick="downloadCSV()">
+        <span class="material-symbols-outlined">download</span>Download CSV
+      </button>
+      <table class="school-table" id="ecz-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Exam Number</th>
+            <th>English</th>
+            <th>Math</th>
+            <th>Science</th>
+            <th>SS</th>
+            <th>CTS</th>
+            <th>Zambian Lang</th>
+            <th>SP1</th>
+            <th>SP2</th>
+            <th>Total</th>
+            <th>Band</th>
+            <th>Eligible?</th>
+            <th>Assigned Pathway</th>
+            <th>Remove</th>
+          </tr> 
+        </thead>
+        <tbody id="ecz-tbody"></tbody>
+      </table>
+      <div id="ecz-output"></div>
+    </div>
+    <!-- Pathways Offered -->
+    <div id="section-pathways" style="display:none;">
+      <div class="section-title">
+        <span class="material-symbols-outlined">route</span>Choose Pathways & Electives Offered
+      </div>
+      <form id="pathways-form"></form>
+      <div class="info-box" style="margin-top:20px;">
+        Uncheck any pathways your school is not offering. Choose electives for each offered pathway.
+      </div>
+      <button class="add-row-btn" style="margin-top:8px;" onclick="savePathways();return false;">
+        <span class="material-symbols-outlined">save</span>Save Pathways
+      </button>
+      <div id="pathways-output"></div>
+      <div class="pathway-summary-list" id="pathway-summary-list"></div>
+    </div>
+    <!-- Automated Placement -->
+    <div id="section-automate" style="display:none;">
+      <div class="section-title">
+        <span class="material-symbols-outlined">auto_mode</span>
+        Automated Placement
+      </div>
+      <button class="add-row-btn" onclick="automatePlacement()">
+        <span class="material-symbols-outlined">auto_mode</span>Run Placement
+      </button>
+      <div id="automate-output"></div>
+    </div>
+  </main>
+  <script>
+    // Province -> District mapping (example, add more if needed)
+    const districtsByProvince = {
+      "Central": ["Chibombo", "Chisamba", "Chitambo", "Kabwe", "Kapiri Mposhi", "Luano", "Mkushi", "Mumbwa", "Ngabwe", "Serenje"],
+      "Copperbelt": ["Chililabombwe", "Chingola", "Kalulushi", "Kitwe", "Luanshya", "Lufwanyama", "Masaiti", "Mpongwe", "Mufulira", "Ndola"],
+      "Eastern": ["Chadiza", "Chama", "Chasefu", "Chipangali", "Chipata", "Kasenengwa", "Katete", "Lumezi", "Lundazi", "Mambwe", "Nyimba", "Petauke", "Sinda", "Vubwi"],
+      "Luapula": ["Chembe", "Chiengi", "Chipili", "Kawambwa", "Lunga", "Mansa", "Milenge", "Mwansabombwe", "Mwense", "Nchelenge", "Samfya"],
+      "Lusaka": ["Chilanga", "Chongwe", "Kafue", "Luangwa", "Lusaka", "Rufunsa", "Shibuyunji"],
+      "Muchinga": ["Chama", "Chinsali", "Isoka", "Kanchibiya", "Lavushimanda", "Mpika", "Nakonde", "Shiwang'andu"],
+      "Northern": ["Chilubi", "Kaputa", "Kasama", "Lunte", "Lupososhi", "Luwingu", "Mbala", "Mporokoso", "Mpulungu", "Mungwi", "Nsama", "Senga Hill"],
+      "North-Western": ["Chavuma", "Ikelenge", "Kabompo", "Kalumbila", "Kasempa", "Manyinga", "Mufumbwe", "Mushindamo", "Solwezi", "Zambezi"],
+      "Southern": ["Chikankata", "Choma", "Gwembe", "Itezhi-Tezhi", "Kalomo", "Kazungula", "Livingstone", "Mazabuka", "Monze", "Namwala", "Pemba", "Siavonga", "Sinazongwe", "Zimba"],
+      "Western": ["Kalabo", "Kaoma", "Limulunga", "Lukulu", "Mitete", "Mongu", "Mufumbwe", "Mulobezi", "Mwandi", "Nalolo", "Nkeyema", "Senanga", "Sesheke", "Shang'ombo", "Sikongo", "Sioma"]
+    };
+
+    // Pathway Data with improved Home Economics logic
+    const pathwayData = {
+      natural: {
+        label: "🌿 Natural Sciences",
+        summarySubjects: [
+          "English Language", "Mathematics", "Civic Education", "Biology", "Chemistry", "Physics", "ICT"
+        ],
+        electives: []
+      },
+      agriculture: {
+        label: "🚜 Agricultural Science",
+        summarySubjects: [
+          "English Language", "Mathematics", "Civic Education", "Agricultural Science", "Chemistry", "Physics", "ICT"
+        ],
+        electives: []
+      },
+      technology: {
+        label: "💻 Technology (STEM)",
+        summarySubjects: [
+          "English Language", "Mathematics", "Civic Education", "Chemistry", "Physics", "ICT", "[Elective: Computer Science or Design & Technology]"
+        ],
+        electives: [
+          {
+            label: "Computer Science or Design & Technology",
+            options: ["Computer Science", "Design & Technology"]
+          }
+        ]
+      },
+      home: {
+        label: "🍽️ HOME ECONOMICS AND HOSPITALITY (STEM)",
+        summarySubjects: [
+          "English Language",
+          "Mathematics",
+          "Civic Education",
+          "Biology",
+          "[Optional: Chemistry if taking Travel & Tourism]",
+          "ICT",
+          "[Language or Practical: French, Chinese, Portuguese, Swahili, Fashion & Fabrics, Food & Nutrition, Hospitality Management, Travel & Tourism]"
+        ],
+        electives: [
+          {
+            label: "Include Chemistry? (optional for Travel & Tourism)",
+            options: ["Include Chemistry", "Not Taking Chemistry"]
+          },
+          {
+            label: "Choose one (Language or Practical):",
+            options: [
+              "French", "Chinese", "Portuguese", "Swahili",
+              "Fashion & Fabrics", "Food & Nutrition", "Hospitality Management", "Travel & Tourism"
+            ]
+          }
+        ]
+      },
+      sports: {
+        label: "⚽ Physical Education & Sports",
+        summarySubjects: [
+          "English Language", "Mathematics", "Civic Education", "Biology", "Physical Education", "ICT", "[Elective: Geography/History/RE, Chemistry/Physics]"
+        ],
+        electives: [
+          {
+            label: "Geography, History, or Religious Education",
+            options: ["Geography", "History", "Religious Education"]
+          },
+          {
+            label: "Chemistry or Physics",
+            options: ["Chemistry", "Physics"]
+          }
+        ]
+      },
+      arts: {
+        label: "🎭 Performing & Creative Arts",
+        summarySubjects: [
+          "English Language", "Mathematics", "Civic Education", "Zambian Language", "ICT", "[Elective: Music/Art & Design, Literature in English/Literature in Zambian Language]"
+        ],
+        electives: [
+          {
+            label: "Music or Art & Design",
+            options: ["Music", "Art & Design"]
+          },
+          {
+            label: "Literature in English or Zambian Language",
+            options: ["Literature in English", "Literature in Zambian Language"]
+          }
+        ]
+      },
+      business: {
+        label: "💼 Business & Finance",
+        summarySubjects: [
+          "English Language", "Mathematics", "Civic Education", "Principles of Accounts", "Commerce", "ICT", "[Elective: Physics/Chemistry/Biology]"
+        ],
+        electives: [
+          {
+            label: "Physics, Chemistry, or Biology",
+            options: ["Physics", "Chemistry", "Biology"]
+          }
+        ]
+      },
+      social: {
+        label: "🌍 Social Sciences",
+        summarySubjects: [
+          "English Language", "Mathematics", "Civic Education", "ICT", "[Elective: Geography/History/RE, Literature/Language, Science]"
+        ],
+        electives: [
+          {
+            label: "Geography, History, or Religious Education",
+            options: ["Geography", "History", "Religious Education"]
+          },
+          {
+            label: "Literature in English, Zambian Language, Foreign Language, or Literature in Zambian Language",
+            options: ["Literature in English", "Zambian Language", "Foreign Language", "Literature in Zambian Language"]
+          },
+          {
+            label: "Physics, Chemistry, or Biology",
+            options: ["Physics", "Chemistry", "Biology"]
+          }
+        ]
+      }
+    };
+
+    const pathwayPriority = [
+      "natural", "technology", "agriculture", "business", "arts", "home", "sports", "social"
+    ];
+
+    function checkSchoolDetails() {
+      const province = document.getElementById("province").value.trim();
+      const district = document.getElementById("district").value.trim();
+      const school = document.getElementById("school").value.trim();
+      let err = "";
+      if (!province) err += "Select province. ";
+      if (!district) err += "Select district. ";
+      if (!school) err += "Enter school name. ";
+      if (err) {
+        document.getElementById("school-details-error").innerText = err;
+        document.getElementById("school-details-error").style.display = "";
+        return false;
+      } else {
+        document.getElementById("school-details-error").style.display = "none";
+        return true;
+      }
+    }
+    document.querySelectorAll('.school-details input, .school-details select').forEach(inp => {
+      inp.addEventListener('input', checkSchoolDetails);
+      inp.addEventListener('change', checkSchoolDetails);
+    });
+
+    document.getElementById('province').addEventListener('change', function(){
+      const val = this.value;
+      const distSel = document.getElementById('district');
+      distSel.innerHTML = '<option value="">Select District</option>';
+      if (districtsByProvince[val]) {
+        districtsByProvince[val].forEach(d => {
+          const opt = document.createElement('option');
+          opt.value = d; opt.textContent = d;
+          distSel.appendChild(opt);
+        });
+      }
+    });
+
+    function showSection(sec) {
+      ["eczs","pathways","automate"].forEach(id=>{
+        document.getElementById("section-"+id).style.display = (id===sec)?"":"none";
+        let btn = document.getElementById("nav-"+id);
+        if(btn) btn.classList.toggle("selected", id===sec);
+      });
+      if(sec==="pathways") renderPathwaySummary();
+    }
+
+    let offeredPathways = Object.keys(pathwayData);
+    let offeredElectives = {};
+
+    function renderPathwaysUI() {
+      let html = "";
+      Object.entries(pathwayData).forEach(([key, val]) => {
+        html += `<div style="margin-bottom:14px;">
+          <label class="checkbox-label">
+            <input type="checkbox" value="${key}" id="chk-${key}" checked onchange="toggleElectives('${key}')"> ${val.label}
+          </label>`;
+        if (val.electives.length) {
+          html += `<div class="elective-box" id="elbox-${key}">`;
+          val.electives.forEach((el, idx) => {
+            html += `<label>${el.label}</label>
+            <select id="el-${key}-${idx}">`;
+            el.options.forEach(opt => {
+              html += `<option value="${opt}">${opt}</option>`;
+            });
+            html += `</select><br>`;
+          });
+          html += `</div>`;
+        }
+        html += `</div>`;
+      });
+      document.getElementById("pathways-form").innerHTML = html;
+    }
+    function toggleElectives(key) {
+      const checked = document.getElementById("chk-" + key).checked;
+      const box = document.getElementById("elbox-" + key);
+      if (box) box.style.display = checked ? "" : "none";
+    }
+    function savePathways() {
+      const checks = document.querySelectorAll("#pathways-form input[type=checkbox]");
+      offeredPathways = Array.from(checks).filter(c=>c.checked).map(c=>c.value);
+      offeredElectives = {};
+      offeredPathways.forEach(key => {
+        const path = pathwayData[key];
+        if (path.electives.length) {
+          offeredElectives[key] = [];
+          path.electives.forEach((el, idx) => {
+            let sel = document.getElementById(`el-${key}-${idx}`);
+            offeredElectives[key][idx] = sel ? sel.value : el.options[0];
+          });
+        }
+      });
+      document.getElementById("pathways-output").innerHTML =
+        `<div class="success-box"><span class="material-symbols-outlined">check_circle</span> ${offeredPathways.length} pathways and electives saved as offered.</div>`;
+      renderPathwaySummary();
+    }
+    renderPathwaysUI();
+
+    function renderPathwaySummary() {
+      let html = "<b>Current Pathways and Subjects Offered:</b><ul>";
+      offeredPathways.forEach(key => {
+        const d = pathwayData[key];
+        html += `<li><b>${d.label}</b><ul>`;
+        d.summarySubjects.forEach(subj => {
+          if (key === "home") {
+            // Custom display for Home pathway
+            if(subj==="[Optional: Chemistry if taking Travel & Tourism]") {
+              const incChem = offeredElectives.home && offeredElectives.home[0] === "Include Chemistry" ? "✔️ Chemistry" : "❌ Chemistry";
+              html += `<li>${incChem}</li>`;
+            } else if(subj.startsWith("[Language or Practical:")) {
+              let langOrPrac = offeredElectives.home && offeredElectives.home[1] ? offeredElectives.home[1] : "-";
+              html += `<li>✔️ ${langOrPrac}</li>`;
+            } else {
+              html += `<li>${subj}</li>`;
+            }
+          } else if(subj.startsWith("[Elective:")) {
+            let idx = d.electives && d.electives.length ? 0 : null;
+            if(idx!==null && offeredElectives[key] && offeredElectives[key][idx]){
+              html += `<li>✔️ ${offeredElectives[key][idx]}</li>`;
+            } else {
+              html += `<li>${subj}</li>`;
+            }
+          } else if(subj.startsWith("[Optional:")) {
+            // handled above for home
+          } else {
+            html += `<li>${subj}</li>`;
+          }
+        });
+        html += `</ul></li>`;
+      });
+      html += "</ul>";
+      document.getElementById("pathway-summary-list").innerHTML = html;
+    }
+
+    function addRow(data) {
+      if (!checkSchoolDetails()) {
+        document.getElementById("ecz-output").innerHTML =
+          '<div class="error-box"><span class="material-symbols-outlined">error</span> Enter all school details before adding learners.</div>';
+        return;
+      }
+      const tbody = document.getElementById("ecz-tbody");
+      const idx = tbody.children.length+1;
+      const vals = data || ["","","","","","","","",""];
+      const tr = document.createElement("tr");
+ tr.innerHTML = `
+  <td>${idx}</td>
+  <td><input type="text" placeholder="Exam No." maxlength="12" pattern="\\d{12}" style="width:110px;" value="${vals[0]||""}" oninput="this.value=this.value.replace(/[^\\d]/g,'').slice(0,12)"></td>
+  <td><input type="number" min="0" max="150" style="width:60px;" value="${vals[1]||""}" oninput="validateMark(this)"></td>
+  <td><input type="number" min="0" max="150" style="width:60px;" value="${vals[2]||""}" oninput="validateMark(this)"></td>
+  <td><input type="number" min="0" max="150" style="width:60px;" value="${vals[3]||""}" oninput="validateMark(this)"></td>
+  <td><input type="number" min="0" max="150" style="width:60px;" value="${vals[4]||""}" oninput="validateMark(this)"></td>
+  <td><input type="number" min="0" max="150" style="width:60px;" value="${vals[5]||""}" oninput="validateMark(this)"></td>
+  <td><input type="number" min="0" max="150" style="width:60px;" value="${vals[6]||""}" oninput="validateMark(this)"></td>
+  <td><input type="number" min="0" max="150" style="width:60px;" value="${vals[7]||""}" oninput="validateMark(this)" placeholder="SP1"></td>
+  <td><input type="number" min="0" max="150" style="width:60px;" value="${vals[8]||""}" oninput="validateMark(this)" placeholder="SP2"></td>
+  <td class="total-cell"></td>
+  <td class="band-cell"></td>
+  <td class="eligible-cell"></td>
+  <td class="assigned-pathway-cell"></td>
+  <td>
+    <button class="remove-row-btn" onclick="this.closest('tr').remove(); updateRowNumbers();">
+      <span class="material-symbols-outlined">delete</span>
+    </button>
+  </td>`;    
+      tbody.appendChild(tr);
+    }
+    function updateRowNumbers() {
+      const trs = document.querySelectorAll("#ecz-tbody tr");
+      trs.forEach((tr, i) => tr.children[0].textContent = i+1);
+    }
+
+    function validateMark(input) {
+      let v = parseInt(input.value, 10);
+      if (isNaN(v) || v < 0) input.value = 0;
+      if (v > 150) input.value = 150;
+    }
+    window.validateMark = validateMark;
+
+    function analyzeECZResults(scores) {
+      if (scores.sp1 == null || scores.sp2 == null || scores.sp1 === "" || scores.sp2 === "") {
+        return { error: "SP1 and SP2 must be entered" };
+      }
+      if (scores.sp1 < 40 || scores.sp2 < 40) {
+        return { error: "SP1 and SP2 are compulsory and must be passed (≥ 40 marks)" };
+      }
+      const subjectVals = [
+        { name: "English", val: scores.eng },
+        { name: "Math", val: scores.math },
+        { name: "Science", val: scores.science },
+        { name: "Social Studies", val: scores.ss },
+        { name: "CTS", val: scores.cts },
+        { name: "Zambian Language", val: scores.lang }
+      ];
+      let blankSubjects = subjectVals.filter(s => s.val === "" || s.val == null);
+      if (blankSubjects.length) return { error: "All 6 main subjects must be entered" };
+      for (let s of subjectVals) if (isNaN(s.val) || s.val < 0 || s.val > 150) return { error: "Marks must be 0-150" };
+      if (isNaN(scores.sp1) || scores.sp1 < 0 || scores.sp1 > 150 ||
+          isNaN(scores.sp2) || scores.sp2 < 0 || scores.sp2 > 150)
+        return { error: "SP1/SP2 marks must be 0-150" };
+      const best4 = subjectVals.sort((a, b) => b.val - a.val).slice(0, 4);
+      const total = Number(scores.sp1) + Number(scores.sp2) + best4.reduce((sum, s) => sum + Number(s.val), 0);
+      const band = total >= 800 ? "Distinction 🏅"
+        : total >= 700 ? "Merit"
+        : total >= 600 ? "Credit"
+        : total >= 500 ? "Pass ✅"
+        : "Below Pass ❌";
+      const eligible = total >= 500;
+      return {
+        sp1: scores.sp1,
+        sp2: scores.sp2,
+        best4,
+        total,
+        band,
+        eligible
+      };
+    }
+
+    function getEligiblePathways(scores) {
+      let elig = [];
+      if (scores.math >= 90 && scores.science >= 90) elig.push("natural");
+      if (scores.math >= 80 && scores.science >= 80) elig.push("technology");
+      if (scores.ss >= 80 || scores.science >= 80) elig.push("agriculture");
+      if (scores.math >= 70 && scores.eng >= 70) elig.push("business");
+      if (scores.cts >= 70 || scores.lang >= 70) elig.push("arts");
+      if (scores.ss >= 70) elig.push("home");
+      if (scores.science >= 70) elig.push("sports");
+      if (scores.eng >= 80 || scores.ss >= 80) elig.push("social");
+      return elig;
+    }
+
+    function fillResultCells(row, total, band, eligible, assigned) {
+      row.querySelector(".total-cell").textContent = total;
+      row.querySelector(".band-cell").textContent = band;
+      row.querySelector(".eligible-cell").innerHTML = eligible;
+      row.querySelector(".assigned-pathway-cell").textContent = assigned;
+    }
+
+    function analyzeAllResults() {
+      if (!checkSchoolDetails()) {
+        document.getElementById("ecz-output").innerHTML =
+          '<div class="error-box"><span class="material-symbols-outlined">error</span> Enter all school details before analyzing results.</div>';
+        return;
+      }
+      const rows = document.querySelectorAll("#ecz-tbody tr");
+      let errors = [];
+      rows.forEach(row => {
+        const inputs = row.querySelectorAll("input");
+        if (inputs.length < 9) {
+          errors.push("Missing fields in row " + row.children[0].textContent);
+          fillResultCells(row, "-", "-", "-", "-");
+          return;
+        }
+        let examNo = inputs[0].value.trim();
+        if (!/^\d{12}$/.test(examNo)) {
+          errors.push(`Row ${row.children[0].textContent}: Exam number must be exactly 12 digits`);
+          fillResultCells(row, "-", "-", "-", "-");
+          return;
+        }
+        let subjects = Array.from(inputs).slice(1, 9).map(inp => inp.value.trim());
+        if (subjects.some(val => val === "")) {
+          errors.push(`Row ${row.children[0].textContent}: All marks must be filled`);
+          fillResultCells(row, "-", "-", "-", "-");
+          return;
+        }
+        let [eng, math, science, ss, cts, lang, sp1, sp2] = subjects.map(val => Number(val));
+        let markArr = [eng, math, science, ss, cts, lang, sp1, sp2];
+        if (markArr.some(val => isNaN(val) || val < 0 || val > 150)) {
+          errors.push(`Row ${row.children[0].textContent}: Marks must be 0-150 only`);
+          fillResultCells(row, "-", "-", "-", "-");
+          return;
+        }
+        let scores = { eng, math, science, ss, cts, lang, sp1, sp2 };
+        let result = analyzeECZResults(scores);
+        if (result.error) {
+          errors.push(`Row ${row.children[0].textContent}: ${result.error}`);
+          fillResultCells(row, "-", "-", "-", "-");
+          return;
+        }
+        row.querySelector(".total-cell").textContent = result.total || "-";
+        row.querySelector(".band-cell").textContent = result.band || "-";
+        row.querySelector(".eligible-cell").innerHTML = result.eligible
+          ? '<span class="material-symbols-outlined" style="color:#4caf50;">done</span>'
+          : '<span class="material-symbols-outlined" style="color:#d32f2f;">close</span>';
+        let assigned = "-";
+        if (result.eligible) {
+          let eligible = getEligiblePathways(scores).filter(pw => offeredPathways.includes(pw));
+          for (let pw of pathwayPriority) {
+            if (eligible.includes(pw)) {
+              assigned = pathwayData[pw].label;
+              if (offeredElectives[pw] && offeredElectives[pw].length) {
+                assigned += " (" + offeredElectives[pw].join(", ") + ")";
+              }
+              break;
+            }
+          }
+        }
+        row.querySelector(".assigned-pathway-cell").textContent = assigned;
+      });
+      if (errors.length) {
+        document.getElementById("ecz-output").innerHTML =
+          '<div class="error-box"><span class="material-symbols-outlined">error</span> ' + errors.join("<br>") + '</div>';
+      } else {
+        document.getElementById("ecz-output").innerHTML =
+          '<div class="success-box"><span class="material-symbols-outlined">check_circle</span> Results analyzed and updated.</div>';
+      }
+    }
+
+    function automatePlacement() {
+      analyzeAllResults();
+      document.getElementById("automate-output").innerHTML =
+        `<div class="success-box"><span class="material-symbols-outlined" style="color:#098e59">check_circle</span>
+        Placement complete. Each eligible learner has been assigned to one pathway (see table above).
+        </div>`;
+    }
+
+    function printTable() {
+      const province = document.getElementById("province").value.trim();
+      const district = document.getElementById("district").value.trim();
+      const school = document.getElementById("school").value.trim();
+      const pathwaysStr = offeredPathways.map(pw => {
+        let label = pathwayData[pw].label;
+        if (offeredElectives[pw] && offeredElectives[pw].length) {
+          label += ` (${offeredElectives[pw].join(', ')})`;
+        }
+        return label;
+      }).join(", ");
+      document.getElementById("print-school").innerHTML =
+        `<b>Province:</b> ${province} &nbsp; <b>District:</b> ${district} &nbsp; <b>School:</b> ${school}`;
+      document.getElementById("print-pathways").innerHTML =
+        `<b>Career Pathways Offered:</b> ${pathwaysStr}`;
+      document.getElementById("print-header").style.display = "block";
+      window.print();
+      setTimeout(() => { document.getElementById("print-header").style.display = "none"; }, 500);
+    }
+
+    function downloadCSV() {
+      let rows = document.querySelectorAll("#ecz-tbody tr");
+      let csv = "Exam Number,English,Math,Science,SS,CTS,Zambian Lang,SP1,SP2,Total,Band,Eligible,Assigned Pathway\n";
+      rows.forEach(row => {
+        let inputs = row.querySelectorAll("input");
+        let vals = Array.from(inputs).map(inp => inp.value.trim());
+        let total = row.querySelector(".total-cell").textContent || "";
+        let band = row.querySelector(".band-cell").textContent || "";
+        let eligible = row.querySelector(".eligible-cell").textContent || "";
+        let assigned = row.querySelector(".assigned-pathway-cell").textContent || "";
+        csv += vals.join(",") + `,${total},${band},${eligible},${assigned}\n`;
+      });
+      const blob = new Blob([csv], {type:'text/csv'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob); a.download = "ecz_results.csv";
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    }
+
+    document.addEventListener('DOMContentLoaded',function(){
+      addRow();
+    });
+
+    window.toggleElectives = toggleElectives;
+  </script>
+</body>
+</html>
